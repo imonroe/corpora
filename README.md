@@ -1,3 +1,69 @@
+# `imonroe/corpora`
+
+This is a PHP- and Composer-friendly fork of the `darius/corpora` package, designed for easy use with PHP projects.
+
+Check the files in the `/data` directory to find out all the things in the corpora.  Each JSON file is an array with about a thousand examples of whatever you're asking for.
+
+## Installation
+
+`composer require imonroe/corpora`
+
+## Usage
+
+```
+use imonroe\corpora\Corpora;
+
+$corpora = new Corpora;
+
+\\ Returns an array of available categories
+
+$categories = $corpora->getCategories();
+
+// Returns an array of subcategories
+
+$subcategories = $corpora->getCategories('architecture');
+
+// Return just the description of a given data file, if one is available.
+
+$description = $corpora->getDescription('words.nouns');
+// $description == "A list of English nouns."
+
+
+// Returns an array of data from the corpora.
+// Specify the file you want in the form of "dirname.dirname.filename"
+// Do not include the .json extension.
+// Available files are included in the \data directory of this repo.
+
+// for instance, if you wanted the contents of the ./data/words/nouns.json file, you'd
+// request it like this:
+
+$nouns = $corpora->getDataFile('words.nouns');
+
+// If you want ./data/music/genres.json, you'd call it like:
+
+$genres = $corpora->getDataFile('music.genres');
+
+// If you want ./data/societies_and_groups/fraternities/fraternities.json,
+
+$fraternities = $corpora->getDataFile('societies_and_groups.fraternities.fraternities');
+
+// You can inspect any of these arrays in the usual way to find out what they contain.
+
+```
+
+## Testing
+
+`composer test`
+
+## Styling
+
+`composer check-style`
+and
+`composer fix-style`
+
+
+Original `darius/corpora` README:
+
 # Corpora
 
 This project is a collection of static corpora (plural of "corpus") that are potentially useful in the creation of weird internet stuff. I've found that, as a creator, sometimes I am making something that needs access to a lot of adjectives, but not necessarily every adjective in the English language. So for the last year I've been copy/pasting an `adjs.json` file from project to project. This is kind of awful, so I'm hoping that this project will at least help me keep everything in one place.
